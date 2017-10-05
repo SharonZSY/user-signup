@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action = "/" method="post">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="Username">Username</label> 
+                    </td>
+                    <td>
+                        <input name="username" type="text" value='' />
+                        <span id=username>{{username_error}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Password">Password</label>
+                        
+                    </td>
+                    <td>
+                        <input name="password" type="password" value='' />
+                        <span id=password>{{password_error}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Verify">Verify Password</label>
+                    </td>
+                    <td>
+                        <input name="verify" type="verify" value=''/>
+                        <span id=verify>{{verify_error}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for-"Email">Email (optional)</label>
+                    </td>
+                    <td>
+                        <input name="email" type="text" value='' />
+                        <span id=email>{{email_error}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type = "submit">
+    </form>
+
+    {% if message %}
+    <p class='message'>{{ message }}</p>
+    {% endif %}
+  
+    {% endblock %}
