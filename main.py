@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, url_for
 import cgi
 
 
@@ -21,7 +21,6 @@ def validate():
     if username == '' or len(username) <= 3 or len(username) >= 20:
         username_error = "Please enter a valid username."
         username = ''
-    
         
     if verify_password != password:
         verify_error = "Passwords do not match."
@@ -37,17 +36,26 @@ def validate():
         email = ''
     
     if not username_error and not password_error and not email_error and not verify_error:
-        return render_template('success.html', username = username)
+        return redirect(url_for('welcome', username = username))
     else: 
-        return render_template('edit.html', username_error = username_error, 
+        return render_template('edit.html', username = username,
+                                            username_error = username_error, 
                                             password_error=password_error, 
                                             verify_error=verify_error, 
                                             email_error=email_error)
 
 
 @app.route("/")
-def index():
+def login():
     return render_template('edit.html')
+
+@app.route("/welcome")
+def welcome():
+
+    username = request.args.get("username")
+    return render_template('success.html', username = username)
+
+
 
 
 app.run()
